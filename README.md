@@ -1,4 +1,4 @@
-# ISTE-340-Project2
+# ISTE-340 Project 2
 jQuery Website Project for Client Programming
 
 
