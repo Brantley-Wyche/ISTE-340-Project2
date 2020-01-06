@@ -1,0 +1,194 @@
+*{
+	font-family: 'Roboto', sans-serif;
+}
+
+@media screen and (min-width: 900px){
+	#banner{
+		font-size: 60px;
+	}
+}
+
+@media screen and (max-width: 600px){
+	#banner{
+		font-size: 25px;
+	}
+
+	#left-stuff,#academic{
+		margin-bottom: 20px !important;
+	}
+}
+
+#banner{/*Banner at the Top*/
+	text-align: center;
+	color: white;
+	
+	font-weight: bold;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #ff8800;
+	width: 100%;
+	margin: 0;
+
+}
+
+#footer{
+	text-align: center;
+	color: white;
+	
+	font-weight: bold;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #ff8800;
+	width: 100%;
+	margin-top: 40px;
+	margin-bottom: 0px;
+}
+
+#peopleContainer, #AboutContainer, #content {
+	background-color: white;  
+	color: black;
+	margin-top: 1rem;
+}
+
+h1, h4{
+	color: rgb(0, 0, 0);
+}
+
+.grid-item { 
+	width: 200px; 
+	height: 200px;
+	display: inline-flex !important;
+}
+
+img{
+	height: 200px;
+	width: 200px;
+}
+
+body{
+	background-color: #FFFFFF;
+}
+
+/*
+*
+*CSS for the Slick buttons
+*
+*/
+.slick-prev:before {
+	color: black !important;
+}
+  .slick-next:before {
+	color: black !important;
+}
+/*
+*
+*END CSS for the Slick buttons
+*
+*/
+
+/*
+*
+*CSS for the about section
+*
+*/
+#below-rights{
+    float: left;
+    width: 100%;
+    margin: 30px 0px 8px 0;
+}
+
+#left-stuff{
+    float: left;
+    width: 47%;
+    margin: 0;
+}
+
+#right-stuff{
+    float: right;
+    width: 47%;
+}
+
+@media screen and (max-width: 767px){
+	#left-stuff{
+		clear: both;
+		float: none;
+		/*margin: 0px 0px 20px 0px;*/
+		width: auto;
+		display: inline-block;
+	}
+
+	#right-stuff{
+		width: auto;
+		float: none;
+	}
+}
+/*
+*
+*END CSS for the about section
+*
+*/
+
+.stat{
+	margin: 20px;
+	padding: 0 !important;
+}
+
+.my-custom-scrollbar {
+	position: relative;
+	height: 350px;
+	overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+margin-bottom: 35px;
+}
+
+#formContainer{
+	padding: 2em;
+}
+.title-item{
+	color:#517989;
+}
+.alert{
+	border-radius:2px;
+	padding: 1em;
+}
+.alert-warning{
+	color: #8a6d3b;
+	background-color: #fcf8e3;
+	border-color: #faebcc;
+}
+
+#MinorsTitle{
+	padding-left: 15px;
+}
+
+h1{
+	text-align: center !important;
+	padding-bottom: 10px !important;
+	margin-top: 40px !important;
+	margin-bottom: 25px !important;
+    border-bottom: 2px solid #ff8800 !important;
+}
+
+h5 {
+	text-align: center;
+  }
+  
+  .card-header {
+	color: #ff8800 !important;
+	text-align: center;
+  }
+  
+  #IntroContainer {
+	margin-top: 40px !important;
+  }
+  
+  #accordionExample2 {
+	margin-bottom: 20px !important;
+  }
+  
+  .modal-title {
+	color: #ff8800;
+  }
+  

@@ -1,0 +1,182 @@
+#footer, #banner {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #ff8800;
+  width: 100%;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+#banner {
+  /*Banner at the Top*/
+  margin: 0;
+}
+
+#footer {
+  margin-top: 40px !important;
+  margin-bottom: 0px !important;
+}
+
+#peopleContainer, #AboutContainer, #content {
+  background-color: white;
+  color: black;
+  margin-top: 1rem !important;
+}
+
+h1, h4 {
+  color: black;
+}
+
+.grid-item {
+  width: 200px;
+  height: 200px;
+  display: inline-flex !important;
+}
+
+img {
+  height: 200px;
+  width: 200px;
+}
+
+body {
+  background-color: #FFFFFF;
+}
+
+/*
+*
+*CSS for the Slick buttons
+*
+*/
+.slick-prev:before {
+  color: black !important;
+}
+
+.slick-next:before {
+  color: black !important;
+}
+
+/*
+*
+*END CSS for the Slick buttons
+*
+*/
+#below-rights {
+  float: left;
+  width: 100%;
+  margin: 30px 0px 8px 0;
+}
+
+#left-stuff {
+  float: left;
+  width: 47%;
+  margin: 0;
+}
+
+#right-stuff {
+  float: right;
+  width: 47%;
+}
+
+.stat {
+  margin: 20px;
+  padding: 0 !important;
+}
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 350px;
+  overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+  margin-bottom: 35px !important;
+}
+
+#formContainer {
+  padding: 2em;
+}
+
+.title-item {
+  color: #517989;
+}
+
+.alert {
+  border-radius: 2px;
+  padding: 1em;
+}
+
+.alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+
+#MinorsTitle {
+  padding-left: 15px;
+}
+
+h1 {
+  text-align: center !important;
+  padding-bottom: 10px !important;
+  margin-top: 40px !important;
+  margin-bottom: 25px !important;
+  border-bottom: 2px solid #ff8800 !important;
+}
+
+h5 {
+  text-align: center;
+}
+
+.card-header {
+  color: #ff8800 !important;
+  text-align: center;
+}
+
+#IntroContainer {
+  margin-top: 40px !important;
+}
+
+#accordionExample2 {
+  margin-bottom: 20px !important;
+}
+
+.modal-title {
+  color: #ff8800;
+}
+
+@media screen and (min-width: 900px) {
+  #banner {
+    font-size: 60px;
+  }
+}
+@media screen and (max-width: 600px) {
+  #banner {
+    font-size: 25px;
+  }
+
+  #academic {
+    margin-bottom: 20px !important;
+  }
+}
+@media screen and (max-width: 767px) {
+  #left-stuff {
+    /*clear: both;*/
+    float: none !important;
+    width: auto !important;
+    /*display: inline-block ;*/
+    margin-bottom: 20px !important;
+  }
+
+  #right-stuff {
+    width: auto !important;
+    float: none !important;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

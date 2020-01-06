@@ -1,0 +1,537 @@
+<!--Brantley Wyche Project 2-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>IST Department</title>
+
+  	<!--jQuery-->
+	<script src="https://code.jquery.com/jquery-latest.js" type="text/javascript">
+	</script>
+	<!--MDBoostrap JS-->
+	<script src="MDB-Free_4.10.1/js/bootstrap.min.js"></script>
+	<!--Slick JS-->
+	<script type="text/javascript" src="slick/slick.min.js"></script>
+	<!--WOW JS-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.2/web-animations.min.js"></script>
+
+	<!--Slick CSS-->
+	<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+	<!--MDBoostrap CSS-->
+	<link href="MDB-Free_4.10.1/css/bootstrap.css" rel="stylesheet">
+	<link href="MDB-Free_4.10.1/css/mdb.css" rel="stylesheet">
+	<link href="MDB-Free_4.10.1/css/modules/animations-extended.min.css" rel="stylesheet">
+	<!--My CSS-->
+	<link href="css/styles.css" type="text/css" rel="stylesheet">
+	
+
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+
+		new WOW().init();
+
+		//ABOUT
+		xhr('get',{path:'/about/'},'#below-rights').done(function(json){
+
+			$('#below-rights').append(
+				`
+				<div class="card col-sm-6 animated wow slideInLeft" id="left-stuff">
+					<div class="card-body">
+						<h2 class="card-title">${json.title}</h2>
+						<p class="card-text">${json.description}</p>
+					</div>
+				</div>`
+			);
+
+
+			$('#below-rights').append(
+				`<div class="card col-sm-6 animated wow slideInRight" id="right-stuff">
+					<div class="card-body">
+						<h2 class="card-title">${json.quoteAuthor}:</h2>
+						<p class="card-text">"${json.quote}"</p>
+					</div>
+				</div>`
+			);
+		});
+
+
+		//DEGREES - Undergraduate
+		xhr('get',{path:'/degrees/undergraduate/'},'#content').done(function(json){
+			var y='';
+			$.each(json.undergraduate,function(i, item){
+
+				y+=
+					`<div class="card z-depth-0 bordered">
+						<div class="card-header">
+							<h5 class="mb-0">
+							<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#${this.degreeName}"
+								aria-expanded="false" aria-controls="${this.degreeName}">
+								${this.title}
+							</button>
+							</h5>
+						</div>
+						<div id="${this.degreeName}" class="collapse" data-parent="#accordionExample2">
+							<div class="card-body">
+							<h6>${item.description}</h6>
+							<h6><b>Available Concentrations:</b> ${this.concentrations}</h6>
+							</div>
+						</div>
+					</div>`;
+			});
+
+			$('#accordionExample2').append(y);
+		});
+		
+		//DEGREES - Graduate
+		xhr('get',{path:'/degrees/graduate/'},'#content').done(function(json){
+
+			var z='';
+			var adv='';
+			$.each(json.graduate,function(i, item){
+
+				if(item.title === undefined){
+					adv+=`<div id="${this.degreeName}"><h2>Other</h2><h4>${item.availableCertificates}</h4></div>`;
+					//not using this
+				}
+				else{
+				
+					z+=
+						`<div class="card z-depth-0 bordered">
+							<div class="card-header">
+								<h5 class="mb-0">
+								<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#${this.degreeName}"
+									aria-expanded="false" aria-controls="${this.degreeName}">
+									${this.title}
+								</button>
+								</h5>
+							</div>
+							<div id="${this.degreeName}" class="collapse" data-parent="#accordionExample2">
+								<div class="card-body">
+									<h6>${item.description}</h6>
+									<h6><b>Available Concentrations:</b> ${this.concentrations}</h6>
+								</div>
+							</div>
+						</div>`;
+				}	
+			});
+
+			$('#accordionExample3').append(z);
+		});
+
+		
+		//MINORS IS DONE
+		xhr('get',{path:'/minors/'},'#content').done(function(json){
+			var a='';
+			
+			$.each(json.UgMinors,function(i, item){
+				a+=`
+					<div class="card z-depth-0 bordered">
+						<div class="card-header" id="${this.title}">
+							<h5 class="mb-0">
+							<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#${this.name}"
+								aria-expanded="false" aria-controls="${this.name}">
+								${this.title}
+							</button>
+							</h5>
+						</div>
+						<div id="${this.name}" class="collapse" aria-labelledby="${this.title}" data-parent="#accordionExample">
+							<div class="card-body">
+								<h6>${item.description}</h6>
+							</div>
+						</div>
+					</div>`;
+				
+			});
+			$('#MinorsTitle').append('<h1>Minors</h1>');
+			$('#accordionExample').append(a);
+		});
+
+		
+		//EMPLOYMENT - Introduction
+		xhr('get',{path:'/employment/introduction/'},'#content').done(function(json){
+
+			$('#IntroTitle').append('<h1>'+json.introduction.title+'</h1>');
+
+			var	emp =`
+				<div class="card">
+					<div class="card-body">
+						<h2 class="card-title">${json.introduction.content[0].title}</h2>
+						<p class="card-text">${json.introduction.content[0].description}</p>
+
+						<h2 class="card-title">${json.introduction.content[1].title}</h2>
+						<p class="card-text">${json.introduction.content[1].description}</p>
+					</div>
+				</div>`;
+
+			$('#IntroRow').append(emp);
+		});
+
+		//EMPLOYMENT - DegreeStatistics
+		xhr('get',{path:'/employment/degreeStatistics/'},'#content').done(function(json){
+
+			$('#degstatTitle').append(`<h1>${json.degreeStatistics.title}</h1>`);
+			var emp2='';
+			$.each(json.degreeStatistics.statistics,function(i, item){
+				emp2+=`<div class="card stat col-sm-3 animated wow fadeInUp"><h2 class="card-header">${this.value}</h2><div class="card-body"><p>${item.description}</p></div></div>`;			
+			});
+
+			$('#degstatRow').append(emp2);
+		});
+
+		//EMPLOYMENT - coopTable
+		xhr('get',{path:'/employment/coopTable'},'#content').done(function(json){
+			$('#cooptitle').append('<h1>'+json.coopTable.title+'</h1>');
+
+			var tab='';
+			$.each(json.coopTable.coopInformation,function(i, item){
+				tab+='<tr><th scope=row>'+this.employer+'</th><td>'+item.degree+'</td><td>'+item.city+'</td><td>'+item.term+'</td></tr>';	
+			});
+
+			$('#cooptable').append(tab);
+
+		});
+
+		//EMPLOYMENT - employmentTable
+		xhr('get',{path:'/employment/employmentTable'},'#content').done(function(json){
+			$('#emptitle').append('<h1>'+json.employmentTable.title+'</h1>');
+
+			var etab='';
+			$.each(json.employmentTable.professionalEmploymentInformation,function(i, item){
+
+				etab+='<tr><th scope=row>'+this.employer+'</th><td>'+item.degree+'</td><td>'+item.city+'</td><td>'+item.title+'</td><td>'+item.startDate+'</td></tr>';	
+				
+			});
+
+			$('#emptable').append(etab);
+
+		});
+
+
+		//PEOPLE - Faculty and Staff
+		xhr('get',{path:'/people/'},'#peopleRow').done(function(json){
+
+
+			//put out all of the faculty
+			var x='';
+			$.each(json.faculty, function(json){
+
+				x+=`<div class="faculty grid-item" data-type="faculty" data-uname="${this.username}"><a data-toggle="modal" data-target="#myModal"><img width = "181px" height = "181px" src="${this.imagePath}"/></a></div>`;
+			});
+
+			//put out all of the staff
+			$.each(json.staff, function(json){
+
+				x+=`<div class="staff grid-item" data-type="staff" data-uname="${this.username}"><img width = "250px" height = "250px" src="${this.imagePath}"/></div>`;
+			});
+
+			//put on the page
+			$('#headerRow').append(`<div class="col-sm-12"><h1>${json.title}</h1><h4>${json.subTitle}</h4></div>`);
+			$('#peopleCol').append(x);
+
+			$('.peopleCol').slick({
+				infinite: true,
+				arrows: false,
+				slidesToShow: 1,
+				variableWidth: true,
+				accessibility: true,
+				slidesToScroll: 3,
+				autoplay: true,
+				autoplaySpeed: 2000
+			});
+
+
+			//Faculty event
+			//USE THE GET ATTRIBUTES FUNCTION ON THE BOTTOM, 
+			var infoModal = $('#myModal');
+			
+			$('.faculty').on('click', function(){
+				var fac2=getAttributesByName(json.faculty,'username', $(this).attr('data-uname'));
+				var fac = getPersonName(json.faculty,'username', $(this).attr('data-uname'));
+
+				infoModal.find('.modal-title').html(fac);
+				infoModal.find('.modal-body').html(fac2);
+				infoModal.modal('show');
+				console.log(fac);
+				console.log(fac2);
+				
+			});
+
+			//Staff event
+			$('.staff').on('click', function(){
+				var stf = getPersonName(json.staff,'username', $(this).attr('data-uname'));
+				var stf2 = getAttributesByName(json.staff,'username', $(this).attr('data-uname'));
+
+				infoModal.find('.modal-title').html(stf);
+				infoModal.find('.modal-body').html(stf2);
+				infoModal.modal('show');
+				console.log(stf);
+				console.log(stf2);
+			});
+		});
+
+		//RESOURCES - studyAbroad
+		xhr('get',{path:'/resources/studyAbroad'},'#content').done(function(json){
+
+			$('#StudyTitle').append(`<h5>${json.studyAbroad.description}</h5>`);
+
+			var tree='';
+			$.each(json.studyAbroad.places,function(i, item){
+
+				tree+=`
+					<div class="col-sm-6">
+						<div class="card stat animated wow fadeIn abroad">
+							<h2 class="card-header">
+								${this.nameOfPlace}
+							</h2>
+							<div class="card-body">
+								<p>${this.description}</p>
+							</div>
+						</div>
+					</div>`;
+			});
+
+			$('#StudyRow').append(tree);
+		});
+
+		//RESOURCES - academicAdvisors
+		xhr('get',{path:'/resources/studentServices/academicAdvisors'},'#content').done(function(json){
+			$('#AdvTitle').append(`<h1>Advising</h1>`);
+			$('#academic').append(
+				`<div class="card animated wow slideInLeft acad">
+					<div class="card-body">
+						<h2 class="card-title">${json.academicAdvisors.title}</h2>
+						<p class="card-text">${json.academicAdvisors.description}</p>
+					</div>
+				</div>`
+			);
+		});
+
+		//RESOURCES - facultyAdvisors
+		xhr('get',{path:'/resources/studentServices/facultyAdvisors'},'#content').done(function(json){
+			$('#faculty').append(
+				`<div class="card animated wow slideInRight acad">
+					<div class="card-body">
+						<h2 class="card-title">${json.facultyAdvisors.title}</h2>
+						<p class="card-text">${json.facultyAdvisors.description}</p>
+					</div>
+				</div>`
+			);
+		});
+
+		
+	});
+
+	
+	//ajax utility
+	//  args
+	//      getPost 	  (is this for a get or a post?)
+	//		d -data 	  {path:'/about/'}
+	//		idForSpinner  #parent (if i want a spinner to show up while it is loading)
+	//  return
+	//		ajax object
+	//  use:
+	//		xhr('get', {path:'/degrees/'}, )
+
+	function xhr(getPost,d,idForSpinner){
+		return $.ajax({
+			type: getPost,
+			cache: false,
+			async: true,
+			dataType: 'json',
+			data: d,
+			url: 'proxy.php',
+			
+		}).always(function(){
+			//kill the spinner
+			$(idForSpinner).find('.dontuse').fadeOut(500, function(){
+				//kill it
+				$(this).remove();
+			});
+		}).fail(function(err){
+			console.log(err);
+		});
+	}
+
+	//getAttributesByName
+	//arr - an array of objects [{...},{...}...]
+	//name - name of the name=value pair's object I want to send back
+	//val - value of the name=value pair's object I want to send back
+
+	//[{x=1,y=1,z=1},{x=2,y=2,z=2},{x=3,y=1,z=2}]
+	function getAttributesByName(arr, name, val){
+		var result2="";
+		var result3="";
+		var result4="";
+		var result5=""; 
+
+		var newResult = "";
+		$.each(arr, function(){
+			if(this[name]===val){
+				
+				if(this.title != null){
+					result2=this.title;
+				}
+				
+				if(this.office != null){
+					result3=this.office;
+				}
+				
+				if(this.phone != null){
+					result4=this.phone;
+				}
+
+				if(this.email != null){
+					result5=this.email;
+				}
+				
+			}
+		});
+		var infoArray = [result2, result3, result4, result5];
+		$.each(infoArray, function(index, value){
+			newResult += '<h2>'+value+'</h2><br>';
+        });
+		return newResult;
+	}
+
+	function getPersonName(arr, name, val){
+		var result="";
+
+		$.each(arr, function(){
+			if(this[name]===val){
+
+				result=this.name;
+				
+			}
+		});
+		
+		return result;
+	}
+</script>
+
+</head>
+<body>
+	<h2 id="banner">IST Department Faculty and Information</h2>
+
+	<div id="IntroContainer" class="container"> 
+		<div id="IntroTitle"></div>
+		<div id="IntroRow" class="row"></div>
+	</div>
+
+  	<div id="AboutContainer" class="container">
+		<div id="AboutRow" class="row">
+			<div class="col-12 col-sm-12 col-md-12">
+				<div id="below-rights">
+				</div>
+			</div>
+	  	</div>
+	</div>
+	
+	<div id="MajorContainer" class="container">
+
+		<div id="UGTitle">
+			<h1>Undergraduate Degrees</h1>
+		</div>
+		<div class="accordion" id="accordionExample2"></div>
+
+		<div id="GTitle">
+			<h1>Graduate Degrees</h1>
+		</div>
+		<div class="accordion" id="accordionExample3"></div>
+	</div>
+
+	<div id="MinorContainer" class="container">
+		<div id="MinorsTitle"></div>
+		<div class="accordion" id="accordionExample"></div>
+	</div>
+
+	<div id="degstat" class="container">
+		<div id="degstatTitle"></div>
+		<div class="row justify-content-center" id="degstatRow"></div>
+  	</div>
+
+	<div id="Tables" class="container">
+
+		<div id="cooptitle"></div>
+		<div class="table-wrapper-scroll-y my-custom-scrollbar table-responsive border">
+
+			<table class="table border" id="cooptable">
+				<thead class="warning-color-dark white-text">
+				  <tr>
+					<th scope="col">Employer</th>
+					<th scope="col">Degree</th>
+					<th scope="col">City</th>
+					<th scope="col">Term</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  
+				</tbody>
+			  </table>
+
+		</div>
+
+		<div id="emptitle"></div>
+		<div class="table-wrapper-scroll-y my-custom-scrollbar border table-responsive">
+
+			<table class="table" id="emptable">
+				<thead class="warning-color-dark white-text">
+				  <tr>
+					<th scope="col">Employer</th>
+					<th scope="col">Degree</th>
+					<th scope="col">City</th>
+					<th scope="col">Title</th>
+					<th scope="col">Start Date</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  
+				</tbody>
+			  </table>
+		</div>
+	</div>
+
+	<div id="peopleContainer" class="grid container">
+		<div id="headerRow" class="row"></div>
+		<div id="peopleRow" class="row">
+			<div id="peopleCol" class="col-sm-12 peopleCol"></div>
+		</div>
+	</div>
+
+	<div id="StudyContainer" class="container">
+		<div>
+			<h1>Study Abroad</h1>
+		</div>
+		<div id="StudyTitle"></div>
+		<div class="row" id="StudyRow"></div>
+	</div>
+
+	<div id="AdvisingContainer" class="container">
+		<div id="AdvTitle"></div>
+		<div class="row" id="AdvRow">
+			<div class="col-sm-6" id="academic"></div>
+			<div class="col-sm-6" id="faculty"></div>
+		</div>
+	</div>
+
+	<h5 id="footer"><b>Disclaimer:</b> This webpage was constructed from an old version of the IST Department API</h5>
+
+	<!--Modal for the people-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title" id="myModalLabel"></h1>
+	      </div>
+	      <div class="modal-body">
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+</body>
+</html>

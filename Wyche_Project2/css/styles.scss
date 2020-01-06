@@ -1,0 +1,197 @@
+$orange: #ff8800;
+
+%banner_and_footer{
+    text-align: center;
+	color: white;
+	font-weight: bold;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: $orange;
+	width: 100%;
+}
+
+@mixin Margins($top,$bottom) {
+
+    @if $top == "none"{
+        margin-bottom: $bottom !important;
+    }
+    @else if $bottom == "none"{
+        margin-top: $top !important;
+    }
+    @else{
+        margin-top: $top !important;
+        margin-bottom: $bottom !important;
+    }
+
+}
+
+@mixin Float_width($float,$width) {
+    float: $float;
+    width: $width;
+}
+
+*{
+	font-family: 'Roboto', sans-serif;
+}
+
+#banner{/*Banner at the Top*/
+	@extend %banner_and_footer;
+	margin: 0;
+
+}
+
+#footer{
+    @extend %banner_and_footer;
+    @include Margins(40px,0px);
+}
+
+#peopleContainer, #AboutContainer, #content {
+	background-color: white;  
+	color: black;
+    @include Margins(1rem,"none");
+}
+
+h1, h4{
+	color: rgb(0, 0, 0);
+}
+
+.grid-item { 
+	width: 200px; 
+	height: 200px;
+	display: inline-flex !important;
+}
+
+img{
+	height: 200px;
+	width: 200px;
+}
+
+body{
+	background-color: #FFFFFF;
+}
+
+/*
+*
+*CSS for the Slick buttons
+*
+*/
+.slick-prev:before {
+	color: black !important;
+}
+  .slick-next:before {
+	color: black !important;
+}
+/*
+*
+*END CSS for the Slick buttons
+*
+*/
+
+
+#below-rights{
+    @include Float_width(left,100%);
+    margin: 30px 0px 8px 0;
+}
+
+#left-stuff{
+    @include Float_width(left,47%);
+    margin: 0;
+}
+
+#right-stuff{
+    @include Float_width(right,47%);
+}
+
+.stat{
+	margin: 20px;
+	padding: 0 !important;
+}
+
+.my-custom-scrollbar {
+	position: relative;
+	height: 350px;
+	overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+    @include Margins("none",35px);
+}
+
+#formContainer{
+	padding: 2em;
+}
+.title-item{
+	color:#517989;
+}
+.alert{
+	border-radius:2px;
+	padding: 1em;
+}
+.alert-warning{
+	color: #8a6d3b;
+	background-color: #fcf8e3;
+	border-color: #faebcc;
+}
+
+#MinorsTitle{
+	padding-left: 15px;
+}
+
+h1{
+	text-align: center !important;
+    padding-bottom: 10px !important;
+    @include Margins(40px,25px);
+    border-bottom: 2px solid $orange !important;
+}
+
+h5{
+    text-align: center;
+}
+
+.card-header{
+    color: $orange !important;
+    text-align: center;
+}
+
+#IntroContainer{
+    @include Margins(40px,"none");
+}
+
+#accordionExample2{
+    @include Margins("none",20px);
+}
+
+.modal-title{
+    color: $orange;
+}
+
+@media screen and (min-width: 900px){
+	#banner{
+		font-size: 60px;
+	}
+}
+
+@media screen and (max-width: 600px){
+	#banner{
+		font-size: 25px;
+	}
+
+	#academic{
+        @include Margins("none",20px);
+	}
+}
+
+@media screen and (max-width: 767px){
+	#left-stuff{
+		/*clear: both;*/
+		float: none !important;
+		width: auto !important;
+        /*display: inline-block ;*/
+        @include Margins("none",20px);
+	}
+
+	#right-stuff{
+		width: auto !important;
+		float: none !important;
+	}
+}
